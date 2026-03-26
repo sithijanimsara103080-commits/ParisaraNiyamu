@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 140 40% 99%;
+    --foreground: 140 40% 10%;
+    --card: 140 40% 100%;
+    --card-foreground: 140 40% 10%;
+    --popover: 140 40% 100%;
+    --popover-foreground: 140 40% 10%;
+    --primary: 152 70% 45%;
+    --primary-foreground: 140 10% 98%;
+    --secondary: 152 60% 94%;
+    --secondary-foreground: 152 80% 20%;
+    --muted: 150 20% 96%;
+    --muted-foreground: 150 20% 45%;
+    --accent: 150 60% 92%;
+    --accent-foreground: 152 80% 25%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 152 40% 88%;
+    --input: 152 40% 88%;
+    --ring: 152 70% 45%;
+    --radius: 1rem;
+    --glass: 152 40% 96%;
+    --glass-border: 152 60% 80%;
+    --gold: 45 92% 55%;
+    --gold-foreground: 45 100% 20%;
+    --hero-glow: 142 70% 60%;
+  }
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.animate-fade-slide-in {
+  animation: fadeSlideIn 0.8s ease-out both;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans selection:bg-primary/20;
+    font-family: 'Inter', 'Noto Sans Sinhala', sans-serif;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: 'Playfair Display', serif;
+    @apply tracking-tight;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/40 backdrop-blur-[40px] border border-white/60 rounded-[2.5rem] shadow-2xl shadow-emerald-900/5 ring-1 ring-emerald-500/5 transition-all duration-700 ease-out;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 100%);
+  }
+
+  .glass-nav {
+    @apply bg-white/70 backdrop-blur-[30px] border-b border-emerald-500/10 shadow-lg shadow-emerald-900/5 transition-all duration-300;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-tr from-emerald-600 via-primary to-blue-500;
+  }
+
+  .liquid-btn {
+    @apply relative overflow-hidden px-10 py-5 bg-primary text-primary-foreground rounded-[1.5rem] font-bold flex items-center justify-center gap-3 transition-all duration-500 hover:scale-[1.05] hover:-translate-y-1 active:scale-95;
+    box-shadow: 0 20px 40px -10px rgba(34, 197, 94, 0.3);
+  }
+
+  .liquid-btn:hover {
+    box-shadow: 0 25px 50px -12px rgba(34, 197, 94, 0.4);
+  }
+
+  .liquid-btn::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full transition-transform duration-1000 ease-in-out;
+  }
+
+  .liquid-btn:hover::after {
+    @apply translate-x-full;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-500;
+    transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-3 scale-[1.01] shadow-2xl;
+    box-shadow: 0 20px 40px -10px rgba(34, 197, 94, 0.2);
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    @apply [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden;
+  }
+
+  @keyframes ambientGlow {
+
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: scale(1) translate(0, 0);
+    }
+
+    33% {
+      opacity: 0.5;
+      transform: scale(1.1) translate(2%, 2%);
+    }
+
+    66% {
+      opacity: 0.4;
+      transform: scale(0.9) translate(-1%, 1%);
+    }
+  }
+
+  .animate-ambient-glow {
+    animation: ambientGlow 15s ease-in-out infinite;
+  }
+
+  .glow-mesh {
+    @apply fixed inset-0 pointer-events-none -z-10;
+    background:
+      radial-gradient(circle at 15% 15%, hsl(var(--primary) / 0.1) 0%, transparent 45%),
+      radial-gradient(circle at 85% 85%, hsl(var(--primary) / 0.1) 0%, transparent 45%),
+      radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.05) 0%, transparent 70%);
+  }
+}
